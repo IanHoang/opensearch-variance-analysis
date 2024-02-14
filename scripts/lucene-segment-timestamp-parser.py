@@ -3,8 +3,6 @@ import datetime
 import argparse
 
 MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-text = "0 [897249601000,897762353000] - 25846743"
-
 
 def main(filename):
     file_lines = read_file(filename)
@@ -43,7 +41,6 @@ def parse_and_convert_lucene_segment_timestamps(file_lines):
 
     return converted_lines
 
-
 def convert_date_to_human_readable_format(input_date):
     date_components = input_date.split("-")
     month, date, year = MONTHS[int(date_components[0])], int(date_components[1]), int(date_components[2])
@@ -59,7 +56,7 @@ def read_file(file):
     return lines
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(prog="Lucene Segment Timestamp Parser", description="A tool to convert lucene segment epoch timestamps to human-readable formatted timestamps")
+    parser = argparse.ArgumentParser(prog="Lucene Segment Timestamp Parser", description="A tool to parse and convert lucene segment epoch timestamps to human-readable formatted timestamps")
     parser.add_argument("--file", "-f", required=True, help="File containing lucene segments timestamps. Usually outputted by executing VisualizePointTree.java from Lucene-University.")
     args = parser.parse_args()
     file = args.file
