@@ -33,7 +33,7 @@ response_2=$(curl --write-out '%{http_code}' --silent --output /dev/null \
     }
   }')
 
-  if [ "$response_2" -eq 200 ]; then
+if [ "$response_2" -eq 200 ]; then
     echo "Success! The response code was 200 (OK)."
 else
     echo "Error: The response code was $response_2."
