@@ -53,7 +53,7 @@ update_merge_policy_to_log_byte_size() {
   echo "Updating merge policy to log_byte_size"
 
   response=$(curl --write-out '%{http_code}' --silent --output /dev/null \
-    -XPUT "${host}/logs-241998/_settings" \
+    -XPUT "${host}/_cluster/settings" \
     -H 'Content-Type: application/json' \
     -d '{
       "indices" : {
@@ -156,6 +156,8 @@ if $segment_size; then
     update_max_merged_segment
 fi
 
+# Merge policy can only be set before creating index since it sets the cluster settings. Merge policy cannot be changed for already existing indices.
+# This will give a 400 validation error: cluster setting is not updatable. This is because the documentation is incorrect and the log byte merge policy cannot be set on a cluster level settings. It must be set at index creation on the index level. Best way to do this is to use OSB and update the index.json to include the merge policy
 if $merge_policy; then
     echo "Flag -m was provided."
     update_merge_policy_to_log_byte_size
