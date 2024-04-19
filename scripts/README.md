@@ -1,8 +1,9 @@
 # Segment Tuning Scenario Variance Analysis
 
 ### Prerequisites
-1. Copy over `segment-tuning-scenario-v2.sh` and `update-index-settings-v2.sh` over to the place where the tests will be run. Ensure to provide the cluster endpoint url, workload params, and test names to the `segment-tuning-scenario-v2.sh` script.
-2. Where you are running the scripts, ensure that PyPi OSB was installed. If using an official workload, modify the workload in `~/.benchmark/benchmarks/workloads/default` repository as needed. For example, if your experiment requires only using a specific index from a workload, delete the other index references in the `workload.json` file in the corresponding workload directory. Also, if you need to create `log_byte_size` merge policy indices, OpenSearch only allows these to be created on index creation at the index level and not the cluster level. Therefore, you'll need to add the following to the index.json file for the corresponding workload directory:
+1. Setup an opensearch cluster from the [OpenSearch-Cluster-Cdk Repository](https://github.com/opensearch-project/opensearch-cluster-cdk) and also set up an EC2 instance (if not running this locally).
+2. Copy over `segment-tuning-scenario-v2.sh` and `update-index-settings-v2.sh` over to the place where the tests will be run (if not running locally, insert into EC2 instance). Ensure to provide the cluster endpoint url, workload params, and test names to the `segment-tuning-scenario-v2.sh` script.
+3. Where you are running the scripts, ensure that PyPi OSB was installed. If using an official workload, modify the workload in `~/.benchmark/benchmarks/workloads/default` repository as needed. For example, if your experiment requires only using a specific index from a workload, delete the other index references in the `workload.json` file in the corresponding workload directory. Also, if you need to create `log_byte_size` merge policy indices, OpenSearch only allows these to be created on index creation at the index level and not the cluster level. Therefore, you'll need to add the following to the index.json file for the corresponding workload directory:
 ```
 "index.merge.policy": "log_byte_size"
 ```
