@@ -1,0 +1,2 @@
+atplotlib
+https://github.com/matplotlib/mpl_finance/archive/master.zip
